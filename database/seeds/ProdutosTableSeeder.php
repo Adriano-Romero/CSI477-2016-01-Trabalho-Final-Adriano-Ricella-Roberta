@@ -1,5 +1,5 @@
 <?php
-
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class ProdutosTableSeeder extends Seeder {
@@ -10,22 +10,25 @@ class ProdutosTableSeeder extends Seeder {
 	 */
 	public function run() {
 		DB::table('produtos')->insert([
-			'produto_nome' => 'Xbox One - Turtle Beach X-40 Headset',
+			'nome' => 'Xbox One - Turtle Beach X-40 Headset',
 			'preco' => 29.89,
+			'marca_id' => 1,
 			'foto' => 'patas.jpg',
 			'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
 		]);
 
 		DB::table('produtos')->insert([
-			'produto_nome' => 'Xbox One - Elite Controller',
+			'nome' => 'Xbox One - Elite Controller',
 			'preco' => 150.00,
 			'foto' => 'agua.jpg',
+			'marca_id' => 2,
 			'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
 		]);
 
 		DB::table('produtos')->insert([
-			'produto_nome' => 'Means Levi Jeans - Dark Blue',
+			'nome' => 'Means Levi Jeans - Dark Blue',
 			'preco' => 59.89,
+			'marca_id' => 1,
 			'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
 		]);
 	}

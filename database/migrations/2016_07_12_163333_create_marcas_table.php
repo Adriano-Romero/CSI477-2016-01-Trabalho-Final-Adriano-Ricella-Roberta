@@ -12,7 +12,7 @@ class CreateMarcasTable extends Migration {
 	public function up() {
 		Schema::create('marcas', function (Blueprint $table) {
 			$table->increments('id');
-			$table->string('nome_marca');
+			$table->string('nome');
 			$table->timestamps();
 		});
 	}

@@ -22,6 +22,22 @@
 {!! Form::close() !!}
 </div>
 </div>
+
+<div>
+@if(isset($error))
+    <h1>{{$error}} </h1>
+  @endif
+
+  @if(Session::has('error'))
+   <h1>{{Session::get('error')}} </h1>
+  @endif
+
+  @if(Session::has('message'))
+    alert("{{Session::get('message')}}");
+  @endif
+
+</div>
+
 <div class="container">
 
 
@@ -67,13 +83,15 @@
           <div class="thumbnail">
             <img src="{{$produto->foto}}" alt="ALT NAME">
             <div class="caption">
-              <h3>{{$produto->nome_produto}}</h3>
-              <p>Marca : <b>{{$produto->marca->nome_marca}}</b></p>
+              <h3>{{$produto->nome}}</h3>
+              <p>Marca : <b>{{$produto->marca->nome}}</b></p>
               <p>Preço : <b>{{$produto->preco}}</b></p>
-              <form action="/cart/add" name="add_to_cart" method="post" accept-charset="UTF-8">
+              <form action="/carrinho/add" name="add_to_cart" method="post" accept-charset="UTF-8">
+              {!! csrf_field() !!}
+
                 <input type="hidden" name="produto" value="{{$produto->id}}" />
                 Quantidade:
-                <select name="amount" style="width: 100%;">
+                <select name="quantidade" style="width: 100%;">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>

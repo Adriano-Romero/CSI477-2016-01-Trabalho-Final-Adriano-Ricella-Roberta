@@ -11,11 +11,11 @@ class MarcasTableSeeder extends Seeder {
 	public function run() {
 
 		DB::table('marcas')->insert([
-			'nome_marca' => 'Apple',
+			'nome' => 'Apple',
 		]);
 
 		DB::table('marcas')->insert([
-			'nome_marca' => 'SONY',
+			'nome' => 'SONY',
 		]);
 	}
 }

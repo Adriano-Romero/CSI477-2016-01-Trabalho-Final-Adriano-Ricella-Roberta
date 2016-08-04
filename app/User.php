@@ -33,4 +33,7 @@ class User extends Authenticatable {
 			$user->token = str_random(30);
 		});
 	}
+	public function getId() {
+		return $this->id;
+	}
 }

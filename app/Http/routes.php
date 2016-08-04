@@ -23,3 +23,25 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::resource('dicas', 'DicasController');
+
+Route::get('/carrinho', array(
+	'before' => 'auth.basic',
+	'as' => 'carrinho',
+	'uses' => 'CarrinhoController@index'));
+
+Route::post('/carrinho/update', [
+	'uses' => 'CartController@update',
+]);
+
+Route::post('/carrinho/add', array(
+	'before' => 'auth.basic',
+	'uses' => 'CarrinhoController@postAddToCart'));
+Route::get('/carrinho/delete/{id}', array(
+	'before' => 'auth.basic',
+	'as' => 'delete_book_from_cart',
+	'uses' => 'CarrinhoController@getDelete'));
+
+Route::post('/compra', array('before' => 'auth.basic',
+	'uses' => 'CompraController@postCompra'));
+Route::get('/user/compras', array('before' => 'auth.basic',
+	'uses' => 'CompraController@index'));

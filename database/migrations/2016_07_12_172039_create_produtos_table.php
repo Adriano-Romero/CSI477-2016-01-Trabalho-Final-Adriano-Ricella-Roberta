@@ -13,7 +13,7 @@ class CreateProdutosTable extends Migration {
 		Schema::create('produtos', function (Blueprint $table) {
 			$table->increments('id');
 			$table->timestamps();
-			$table->string('nome_produto');
+			$table->string('nome');
 			$table->integer('quantidade');
 			$table->decimal('preco', 10, 2)->unsigned();
 			$table->text('descricao');

@@ -8,7 +8,7 @@ class ProdutosController extends Controller {
 	public function index() {
 
 		$search = \Request::get('search'); //<-- we use global request to get the param of URI
-		$produtos = Produto::where('nome_produto', 'like', '%' . $search . '%')->orderBy('id', 'asc')->with('marca')->get();
+		$produtos = Produto::where('nome', 'like', '%' . $search . '%')->orderBy('id', 'asc')->with('marca')->get();
 
 		return view('produtos.index', ['produtos' => $produtos]);
 	}

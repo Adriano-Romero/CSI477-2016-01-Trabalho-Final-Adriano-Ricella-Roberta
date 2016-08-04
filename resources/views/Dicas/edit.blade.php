@@ -5,6 +5,7 @@
 <h1>Edite a dica - {{ $dica->titulo }} </h1>
 <p class="lead">Edite a dica abaixo <a href="{{ route('dicas.index') }}">Voltar as  dicas.</a></p>
 
+
 {{$dica->descricao}}
 <hr>
 
