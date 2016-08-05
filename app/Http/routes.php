@@ -15,9 +15,9 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
-Route::get('/produtos', 'ProdutosController@index');
-Route::get('produtos/{id}', 'ProdutosController@show');
-
+//Route::get('/produtos', 'ProdutosController@index');
+//Route::get('produtos/{id}', 'ProdutosController@show');
+Route::resource('produtos', 'ProdutosController');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
@@ -44,4 +44,7 @@ Route::get('/carrinho/delete/{id}', array(
 Route::post('/compra', array('before' => 'auth.basic',
 	'uses' => 'CompraController@postCompra'));
 Route::get('/user/compras', array('before' => 'auth.basic',
+	'uses' => 'CompraController@index'));
+
+Route::get('compras', array('before' => 'auth.basic',
 	'uses' => 'CompraController@index'));

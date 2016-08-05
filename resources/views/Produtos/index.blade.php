@@ -29,11 +29,15 @@
   @endif
 
   @if(Session::has('error'))
-   <h1>{{Session::get('error')}} </h1>
+  <div class="alert alert-danger">
+   <p>{{Session::get('error')}} </p>
+    </div>
   @endif
 
-  @if(Session::has('message'))
-    alert("{{Session::get('message')}}");
+    @if(Session::has('message'))
+     <div class="alert alert-success">
+        {{ Session::get('message') }}
+    </div>
   @endif
 
 </div>

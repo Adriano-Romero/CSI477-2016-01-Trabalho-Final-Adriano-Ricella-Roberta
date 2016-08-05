@@ -13,8 +13,10 @@
    <h1>{{Session::get('error')}} </h1>
   @endif
 
-  @if(Session::has('message'))
-    alert("{{Session::get('message')}}");
+   @if(Session::has('message'))
+     <div class="alert alert-success">
+        {{ Session::get('message') }}
+    </div>
   @endif
 
 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dica;
+use Auth;
 use Illuminate\Http\Request;
 use Session;
 
@@ -23,6 +24,11 @@ class DicasController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
+		if (!Auth::user()->admin) {
+			return redirect('/produtos')
+				->with('error', 'Acesso negado');
+
+		}
 		return view('dicas.create');
 	}
 
@@ -65,6 +71,11 @@ class DicasController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit($id) {
+		if (!Auth::user()->admin) {
+			return redirect('/produtos')
+				->with('error', 'Acesso negado');
+
+		}
 		$dica = Dica::findOrFail($id);
 		return view('dicas.edit', compact('dica'));
 	}

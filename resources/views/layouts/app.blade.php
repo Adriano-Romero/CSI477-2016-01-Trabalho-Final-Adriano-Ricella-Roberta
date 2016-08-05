@@ -52,6 +52,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/produtos') }}">Produtos</a></li>
+                    <li><a href="{{ url('/compras') }}">Compras</a></li>
                      <li><a href="{{ url('/dicas') }}">Dicas</a></li>
                 </ul>
 
@@ -62,6 +63,7 @@
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Registrar</a></li>
                     @else
+                        <li><a href="{{ url('/carrinho') }}">Carrinho</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>

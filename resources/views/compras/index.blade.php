@@ -1,5 +1,9 @@
 @extends('layouts.app')
+@section('title', 'Lista de Compras')
 @section('content')
+
+
+
 <div class="container" style="width:60%">
 
 <div>
@@ -12,7 +16,9 @@
   @endif
 
   @if(Session::has('message'))
-    alert("{{Session::get('message')}}");
+     <div class="alert alert-success">
+        {{ Session::get('message') }}
+    </div>
   @endif
 
 </div>

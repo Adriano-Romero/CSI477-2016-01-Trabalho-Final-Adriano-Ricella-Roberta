@@ -6,8 +6,12 @@
 @section('title', 'Lista de dicas')
 @section('content')
 <h2>Lista de Dicas</h2>
-<li><a href="{{ url('/dicas/create') }}" class=" lead btn btn-default">Adicionar uma nova dica</a></li>
+@if ((Auth::user()->admin))
+	<li><a href="{{ url('/dicas/create') }}" class=" lead btn btn-default">Adicionar uma nova dica</a></li>
 <hr>
+@endif
+
+
 
 @foreach($dicas as $dica)
     <h3>{{ $dica->titulo }}</h3>

@@ -26,7 +26,7 @@ class CarrinhoController extends Controller {
 
 	public function postAddToCart() {
 		$rules = array(
-			'quantidade' => 'required|numeric',
+			'quantidade' => 'required|numeric|min:1',
 			'produto' => 'required|numeric|exists:produtos,id',
 		);
 
