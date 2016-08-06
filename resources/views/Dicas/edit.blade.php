@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Atualize a dica')
 @section('content')
 
 <h1>Edite a dica - {{ $dica->titulo }} </h1>
@@ -33,7 +33,7 @@
     {!! Form::textarea('descricao', null, ['class' => 'form-control']) !!}
 </div>
 
-{!! Form::submit('Update dica', ['class' => 'btn btn-primary']) !!}
+{!! Form::submit('Atualize a dica', ['class' => 'btn btn-primary']) !!}
 
 {!! Form::close() !!}
 

@@ -3,12 +3,12 @@
 
 
 
-@section('title', 'Lista de dicas')
+@section('title', 'Lista de Marcas')
 @section('content')
-<h2 class='text-center'>Dicas</h2>
+<h2 class='text-center'>Marcas</h2>
 @if (!Auth::guest())
 	@if ((Auth::user()->admin))
-	<a href="{{ url('/dicas/create') }}" class=" lead btn btn-default ">Adicionar uma nova dica</a>
+	<a href="{{ url('/marcas/create') }}" class=" lead btn btn-default ">Adicionar uma nova marca</a>
 <hr>
 @endif
 @endif
@@ -28,14 +28,19 @@
             </div>
 
 <div class="col-md-9 ">
-@foreach($dicas as $dica)
-    <h3>{{ $dica->titulo }}</h3>
-    <p>{{ $dica->descricao}}</p>
+@foreach($marcas as $marca)
+    <h3>{{ $marca->nome}}</h3>
     <p>
-        <a href="{{ route('dicas.show', $dica->id) }}" class="btn btn-info">Visualizar dica</a>
+        <a href="{{ route('marcas.show', $marca->id) }}" class="btn btn-info">Visualizar marca</a>
          @if (!Auth::guest())
 			@if (Auth::user()->admin)
-                <a href="{{ route('dicas.edit', $dica->id) }}" class="btn btn-primary">Editar Dica</a>
+                <a href="{{ route('marcas.edit', $marca->id) }}" class="btn btn-primary">Editar Dica</a>
+        {!! Form::open([
+            'method' => 'DELETE',
+            'route' => ['marcas.destroy', $marca->id]
+        ]) !!}
+            {!! Form::submit('Apagar essa marca?', ['class' => 'btn btn-danger']) !!}
+        {!! Form::close() !!}
             @endif
         @endif
 

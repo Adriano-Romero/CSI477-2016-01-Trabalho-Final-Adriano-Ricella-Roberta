@@ -22,8 +22,11 @@
   @endif
 
 </div>
-
+@if ((Auth::user()->admin))
+<h3>Compras Gerais</h3>
+@else
 <h3>Suas compras</h3>
+@endif
 <div class="menu">
   <div class="accordion">
 @foreach($compras as $compra)

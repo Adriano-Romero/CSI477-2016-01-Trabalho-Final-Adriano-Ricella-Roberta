@@ -14,6 +14,7 @@
     -->
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+     @yield('header')
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
@@ -50,10 +51,18 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/sobre') }}">Sobre</a></li>
                     <li><a href="{{ url('/produtos') }}">Produtos</a></li>
-                    <li><a href="{{ url('/compras') }}">Compras</a></li>
+                    @if (!Auth::guest())
+                        <li><a href="{{ url('/compras') }}">Compras</a></li>
+                        @if (Auth::user()->admin)
+                            <li><a href="{{ url('/marcas') }}">Marcas</a></li>
+                            <li><a href="{{ url('/lista') }}">Lista de produtos</a></li>
+                        @endif
+                    @endif
+
                      <li><a href="{{ url('/dicas') }}">Dicas</a></li>
+
                 </ul>
 
                 <!-- Right Side Of Navbar -->

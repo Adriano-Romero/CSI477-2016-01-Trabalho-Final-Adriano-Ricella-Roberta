@@ -10,7 +10,7 @@ class CreateCompraProdutosTable extends Migration {
 	 * @return void
 	 */
 	public function up() {
-		Schema::create('compra_produtos', function (Blueprint $table) {
+		Schema::create('compra_produto', function (Blueprint $table) {
 			$table->increments('id');
 			$table->integer('compra_id');
 			$table->integer('produto_id');
@@ -27,6 +27,6 @@ class CreateCompraProdutosTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::drop('compra_produtos');
+		Schema::drop('compra_produto');
 	}
 }

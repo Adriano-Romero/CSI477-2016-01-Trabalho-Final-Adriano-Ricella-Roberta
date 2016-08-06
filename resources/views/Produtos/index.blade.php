@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('header')
+
+@stop
 
 @section('title', 'Lista de produtos')
 
@@ -23,6 +26,13 @@
 </div>
 </div>
 
+@if (!Auth::guest())
+  @if ((Auth::user()->admin))
+  <a href="{{ url('/produtos/create') }}" class=" lead btn btn-default ">Adicionar um novo produto</a>
+<hr>
+@endif
+@endif
+
 <div>
 @if(isset($error))
     <h1>{{$error}} </h1>
@@ -44,9 +54,22 @@
 
 <div class="container">
 
+<div class="row ">
 
 
-<div class="col-md-9 text-center">
+    <div class="col-md-4">
+                <img class="slide-image" src="imagens/Digital_Nutri_logo.jpg" alt="">
+                <div class="list-group">
+                    <a href="/sobre" class="list-group-item">Sobre</a>
+                    <a href="/contato" class="list-group-item">Contate-nos</a>
+                    <a href="/produtos" class="list-group-item">Produtos</a>
+                    <a href="/dicas" class="list-group-item">Dicas</a>
+
+                </div>
+            </div>
+
+
+<div class="col-md-8 ">
                 <div class="row carousel-holder">
                     <div class="col-md-12">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -75,19 +98,20 @@
                         </div>
                     </div>
                 </div>
-             </div>
 
 
+  <p></p>
 
  <!-- Fim carrossel -->
-    <div class="row">
+
       <ul class="thumbnails">
         @foreach($produtos as $produto)
-        <div class="col-sm-4 col-lg-4 col-md-4">
+
+<div class="col-sm-4 col-lg-4 col-md-4">
           <div class="thumbnail">
-            <img src="{{$produto->foto}}" alt="ALT NAME">
+            <img src="{{$produto->foto}}" class="" alt="ALT NAME" width="320" height="150">
             <div class="caption">
-              <h3>{{$produto->nome}}</h3>
+              <h3><a href="produtos/{{$produto->id}}">{{$produto->nome}}</a></h3>
               <p>Marca : <b>{{$produto->marca->nome}}</b></p>
               <p>Preço : <b>{{$produto->preco}}</b></p>
               <form action="/carrinho/add" name="add_to_cart" method="post" accept-charset="UTF-8">
@@ -106,9 +130,11 @@
             </form>
             </div>
           </div>
-        </div>
+     </div>
         @endforeach
+
       </ul>
+    </div>
     </div>
   </div>
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 
-@section('title', 'Crie uma dica')
+@section('title', 'Edite o Produto')
 @section('content')
 
 
@@ -23,8 +23,8 @@
 
 
 
-<h1>Adicione um novo produto</h1>
-<p class="lead">Insira  as informações.</p>
+<h1>Edite o produto</h1>
+<p class="lead">Atualize as informações.</p>
 <hr>
 
 
@@ -44,13 +44,18 @@
 
 <div class="form-group">
     {!! Form::label('preco', 'Preço:', ['class' => 'control-label']) !!}
-    {!! Form::textarea('preco', null, ['class' => 'form-control']) !!}
+    {!! Form::text('preco', null, ['class' => 'form-control']) !!}
 </div>
 
+<div class="form-group{{ $errors->has('foto') ? ' has-error' : '' }}">
+    {!! Form::label('foto', 'Foto') !!}
+    {!! Form::text('foto', null, ['class' => 'form-control', 'required' => 'required']) !!}
+    <small class="text-danger">{{ $errors->first('foto') }}</small>
+</div>
 
 <div class="form-group">
     {!! Form::label('quantidade', 'Quantidade:', ['class' => 'control-label']) !!}
-    {!! Form::textarea('quantidade', null, ['class' => 'form-control']) !!}
+    {!! Form::text('quantidade', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group{{ $errors->has('marca_id') ? ' has-error' : '' }}">
@@ -61,10 +66,10 @@
 
 <div class="form-group">
     {!! Form::label('descricao', 'Descrição:', ['class' => 'control-label']) !!}
-    {!! Form::textarea('descricao', null, ['class' => 'form-control']) !!}
+    {!! Form::text('descricao', null, ['class' => 'form-control']) !!}
 </div>
 
-{!! Form::submit('Crie uma nova dica', ['class' => 'btn btn-primary']) !!}
+{!! Form::submit('Edite o produto', ['class' => 'btn btn-primary']) !!}
 
 {!! Form::close() !!}
 

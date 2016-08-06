@@ -11,7 +11,7 @@ use Redirect;
 class CompraController extends Controller {
 	public function index() {
 		$user_id = Auth::user()->id;
-		if (Auth::user()->admin) {
+		if (Auth::guest() or !Auth::user()->admin) {
 
 			$compras = Compra::all();
 

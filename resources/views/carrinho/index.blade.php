@@ -23,7 +23,6 @@
 
 
 	<div class="container" style="width:60%">
-	{{Auth::id()}}
   <h1>Seu carrinho</h1>
   <table class="table">
     <tbody>
@@ -48,7 +47,27 @@
         <tr>
           <td>{{$carrinho_item->produtos->nome}}</td>
           <td>
-           {{$carrinho_item->quantidade}}
+           <div class="col-sm-3 col-md-3" id="Carts-Sub-Containers">
+                <form action="/carrinho/update" method="post" class="form-inline">
+                    {!! csrf_field() !!}
+                    <input type="hidden" name="produto" value="{{$carrinho_item->produtos->id}}" />
+                    <input type="hidden" name="carrinho_id" value="{{$carrinho_item->id}}" />
+                    <div class="form-group">
+                        <select name="quantidade" class="form-control" title="Quantidade">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <button class="btn btn-sm btn-default"><i class="fa fa-refresh" aria-hidden="true">Atualizar</i></button>
+                    </div>
+                </form>
+            </div>
+             <div class="col-sm-1 col-md-1">
+              {{$carrinho_item->quantidade}}
+
+            </div>
           </td>
           <td>
             {{$carrinho_item->produtos->preco}}
@@ -57,7 +76,7 @@
            {{$carrinho_item->total}}
           </td>
           <td>
-            <a href="{{URL::route('delete_book_from_cart',array($carrinho_item->id))}}">Delete</a>
+            <a href="{{URL::route('delete_book_from_cart',array($carrinho_item->id))}}">Remover</a>
           </td>
         </tr>
       @endforeach

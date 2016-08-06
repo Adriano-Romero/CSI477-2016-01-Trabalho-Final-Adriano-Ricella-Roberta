@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Dica;
+use App\Marca;
 use Auth;
 use Illuminate\Http\Request;
 use Session;
 
-class DicasController extends Controller {
+class MarcasController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$dicas = Dica::all();
-		return view('dicas.index', ['dicas' => $dicas]);
+		if (Auth::guest() or !Auth::user()->admin) {
+			return redirect('/produtos')
+				->with('error', 'Acesso negado');
+
+		}
+		$marcas = Marca::all();
+		return view('marcas.index', ['marcas' => $marcas]);
 	}
 
 	/**
@@ -27,9 +32,8 @@ class DicasController extends Controller {
 		if (Auth::guest() or !Auth::user()->admin) {
 			return redirect('/produtos')
 				->with('error', 'Acesso negado');
-
 		}
-		return view('dicas.create');
+		return view('marcas.create');
 	}
 
 	/**
@@ -40,14 +44,13 @@ class DicasController extends Controller {
 	 */
 	public function store(Request $request) {
 		$this->validate($request, [
-			'titulo' => 'required',
-			'descricao' => 'required',
+			'nome' => 'required',
 		]);
 
 		$input = $request->all();
-		Dica::create($input);
+		Marca::create($input);
 
-		Session::flash('flash_message', 'Dica criada com sucesso!');
+		Session::flash('flash_message', 'Marca criada com sucesso!');
 
 		return redirect()->back();
 	}
@@ -59,9 +62,13 @@ class DicasController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($id) {
-		//
-		$dica = Dica::findOrFail($id);
-		return view('dicas.show', compact('dica'));
+		if (Auth::guest() or !Auth::user()->admin) {
+			return redirect('/produtos')
+				->with('error', 'Acesso negado');
+
+		}
+		$marca = Marca::findOrFail($id);
+		return view('marcas.show', compact('marca'));
 	}
 
 	/**
@@ -76,8 +83,8 @@ class DicasController extends Controller {
 				->with('error', 'Acesso negado');
 
 		}
-		$dica = Dica::findOrFail($id);
-		return view('dicas.edit', compact('dica'));
+		$marca = Marca::findOrFail($id);
+		return view('marcas.edit', compact('marca'));
 	}
 
 	/**
@@ -88,18 +95,17 @@ class DicasController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, $id) {
-		$dica = Dica::findOrFail($id);
+		$marca = Marca::findOrFail($id);
 
 		$this->validate($request, [
-			'titulo' => 'required',
-			'descricao' => 'required',
+			'nome' => 'required',
 		]);
 
 		$input = $request->all();
 
-		$dica->fill($input)->save();
+		$marca->fill($input)->save();
 
-		Session::flash('flash_message', 'Dica atualizada!');
+		Session::flash('flash_message', 'Marca aatualizada!');
 
 		return redirect()->back();
 	}
@@ -111,12 +117,6 @@ class DicasController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id) {
-		$dica = Dica::findOrFail($id);
-
-		$dica->delete();
-
-		Session::flash('flash_message', 'Dica apagada com sucesso!');
-
-		return redirect()->route('dicas.index');
+		//
 	}
 }

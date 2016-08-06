@@ -11,18 +11,18 @@
 |
  */
 
-Route::get('/', function () {
-	return view('welcome');
-});
+Route::get('/', 'ProdutosController@index');
 
 //Route::get('/produtos', 'ProdutosController@index');
 //Route::get('produtos/{id}', 'ProdutosController@show');
 Route::resource('produtos', 'ProdutosController');
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+//Route::get('/home', 'HomeController@index');
 
 Route::resource('dicas', 'DicasController');
+
+Route::resource('marcas', 'MarcasController');
 
 Route::get('/carrinho', array(
 	'before' => 'auth.basic',
@@ -30,7 +30,7 @@ Route::get('/carrinho', array(
 	'uses' => 'CarrinhoController@index'));
 
 Route::post('/carrinho/update', [
-	'uses' => 'CartController@update',
+	'uses' => 'CarrinhoController@update',
 ]);
 
 Route::post('/carrinho/add', array(
@@ -48,3 +48,13 @@ Route::get('/user/compras', array('before' => 'auth.basic',
 
 Route::get('compras', array('before' => 'auth.basic',
 	'uses' => 'CompraController@index'));
+
+Route::get('lista', 'ProdutosController@lista');
+
+Route::get('contato', function () {
+	return view('contato');
+});
+
+Route::get('sobre', function () {
+	return view('welcome');
+});

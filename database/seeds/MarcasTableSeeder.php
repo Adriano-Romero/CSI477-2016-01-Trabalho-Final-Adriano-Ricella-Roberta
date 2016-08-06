@@ -9,13 +9,27 @@ class MarcasTableSeeder extends Seeder {
 	 * @return void
 	 */
 	public function run() {
-
 		DB::table('marcas')->insert([
-			'nome' => 'Apple',
+			'nome' => 'Village Nutrition',
 		]);
 
 		DB::table('marcas')->insert([
-			'nome' => 'SONY',
+			'nome' => 'Natural Motion',
+		]);
+
+		DB::table('marcas')->insert([
+			'nome' => 'CarobHouses',
+		]);
+
+		DB::table('marcas')->insert([
+			'nome' => 'Hearts nature',
+		]);
+
+		DB::table('marcas')->insert([
+			'nome' => 'Jasmine',
+		]);
+		DB::table('marcas')->insert([
+			'nome' => 'Novo Citrus',
 		]);
 	}
 }

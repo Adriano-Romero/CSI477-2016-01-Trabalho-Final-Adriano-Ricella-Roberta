@@ -24,7 +24,7 @@ class ProdutosController extends Controller {
 	}
 
 	public function create() {
-		if (!Auth::user()->admin) {
+		if (Auth::guest() or !Auth::user()->admin) {
 			return redirect('/produtos')
 				->with('error', 'Acesso negado');
 
@@ -52,13 +52,35 @@ class ProdutosController extends Controller {
 	}
 
 	public function edit($id) {
-		if (!Auth::user()->admin) {
+		if (Auth::guest() or !Auth::user()->admin) {
 			return redirect('/produtos')
 				->with('error', 'Acesso negado');
 
 		}
+		$produto = Produto::findOrFail($id);
 		$marcas = Marca::lists('nome', 'id');
-		return view('produtos.edit', compact('marcas'));
+		return view('produtos.edit', compact('marcas', 'produto'));
+	}
+
+	public function update(Request $request, $id) {
+		$produto = Produto::findOrFail($id);
+
+		$this->validate($request, [
+			'nome' => 'required',
+			'descricao' => 'required',
+			'quantidade' => 'required|numeric|min:0',
+			'preco' => 'required|numeric',
+			'foto' => 'required',
+			'marca_id' => 'required',
+		]);
+
+		$input = $request->all();
+
+		$produto->fill($input)->save();
+
+		Session::flash('flash_message', 'Produto atualizado!');
+
+		return redirect()->back();
 	}
 
 	public function destroy($id) {
@@ -69,6 +91,18 @@ class ProdutosController extends Controller {
 		Session::flash('flash_message', 'Produto apagado com sucesso!');
 
 		return redirect()->route('produtos.index');
+	}
+
+	public function lista() {
+		if (Auth::guest() or !Auth::user()->admin) {
+			return redirect('/produtos')
+				->with('error', 'Acesso negado');
+
+		}
+		$search = \Request::get('search'); //<-- we use global request to get the param of URI
+		$produtos = Produto::where('nome', 'like', '%' . $search . '%')->orderBy('id', 'asc')->with('marca')->get();
+
+		return view('produtos.lista', ['produtos' => $produtos]);
 	}
 
 }
