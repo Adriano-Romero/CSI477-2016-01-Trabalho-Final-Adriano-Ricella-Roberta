@@ -10,8 +10,13 @@ use Redirect;
 
 class CompraController extends Controller {
 	public function index() {
+		if (Auth::guest()) {
+			return redirect('/produtos')
+				->with('error', 'Acesso negado');
+
+		}
 		$user_id = Auth::user()->id;
-		if (Auth::guest() or !Auth::user()->admin) {
+		if (!Auth::user()->admin) {
 
 			$compras = Compra::all();
 
